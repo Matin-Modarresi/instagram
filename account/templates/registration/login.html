@@ -21,5 +21,9 @@
       <p><input type="submit" value="Log-in"></p>
     </form>
     <p><a href="{% url "password_reset" %}">Forgoten your Password?</a></p>
+
+    <li class="">
+      <a href="{% url "social:begin" 'github' %}">Sign in with github</a>
+    </li>
   </div>
 {% endblock %}

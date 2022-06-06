@@ -26,12 +26,14 @@ SECRET_KEY = 'django-insecure-ahsj$nz1va$@6g%z1(sgyn3j_sj#*h4yj)2_!yp#0iu@2cl%2h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com','127.0.0.1','localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'social_django',
+    'django_extensions',
     'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -130,3 +132,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDAI_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+]
+
+#https://github.com/settings/applications/1922606
+SOCIAL_AUTH_GITHUB_KEY = 'd13d7f22df10c6f7a1d8'
+SOCIAL_AUTH_GITHUB_SECRET = '72bd88ee1b1092c39756d038a95b8ac0a3ec9b87'
