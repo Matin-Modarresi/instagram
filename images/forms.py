@@ -28,13 +28,13 @@ class ImageCreateForm(forms.ModelForm):
         extension = image_url.rsplit('.',1)[1].lower()
         name = slugify(image.title)
         image_name = f'{name}.{extension}'
-
-        response = request.urlopen(image_url)
-        image.image.save(image_name, ContentFile(response.read()),save=False)
+        
+        request_site = request.Request(image_url,headers={"User-Agent":"Mozilla/5.0"})
+        response = request.urlopen(request_site)
+        image.image.save(image_name, ContentFile(response.read()),save=False) #https://docs.djangoproject.com/en/4.1/ref/models/fields/#django.db.models.fields.files.FieldFile.save
 
         if commit:
             image.save()
 
         return image
-
 
